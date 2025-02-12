@@ -1,56 +1,56 @@
-#app {
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
 }
 
-#filters {
-    width: 200px;
+.container {
+    display: flex;
+    width: 100%;
+}
+
+aside {
+    width: 25%;
+    padding: 20px;
+    background: #f4f4f4;
+}
+
+main {
+    flex-grow: 1;
     padding: 20px;
 }
 
-#searchBar {
+#search {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-}
-
-#tagFilters ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#tagFilters li {
-    cursor: pointer;
-    padding: 5px;
-}
-
-#tutorials {
-    flex-grow: 1;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
+    font-size: 16px;
 }
 
 .tutorial-block {
-    width: 30%;
-    margin: 10px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
-.tutorial-block h3 {
-    font-size: 1.2em;
-}
-
-.tutorial-block p {
-    font-size: 1em;
-}
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
+.tutorial-title {
+    color: #007BFF;
     text-decoration: underline;
+    cursor: pointer;
+}
+
+.filter-btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 12px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: #0056b3;
 }
