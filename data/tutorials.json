@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "Introduction to Digital Humanities",
+        "description": "An overview of the field of Digital Humanities, including its history and current trends.",
+        "topics": ["history", "overview", "digital humanities"],
+        "mode": ["tutorial", "video"],
+        "link": "https://example.com/digital-humanities-intro"
+    },
+    {
+        "id": 2,
+        "title": "Text Mining with Python",
+        "description": "Learn how to analyze and visualize text data using Python.",
+        "topics": ["python", "text mining", "programming"],
+        "mode": ["tutorial", "docs"],
+        "link": "https://example.com/text-mining-python"
+    },
+    {
+        "id": 3,
+        "title": "Geospatial Analysis in Humanities",
+        "description": "A tutorial on using GIS tools to analyze geographical data in humanities research.",
+        "topics": ["GIS", "geospatial", "analysis"],
+        "mode": ["video", "docs"],
+        "link": "https://example.com/geospatial-analysis-humanities"
+    }
+]
