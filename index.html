@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Humanities Tutorials</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="filters">
+            <input type="text" id="searchBar" placeholder="Search tutorials..." onkeyup="filterData()">
+            <div id="topicFilters">
+                <h3>Topics</h3>
+                <ul id="topicList"></ul>
+            </div>
+            <div id="modeFilters">
+                <h3>Mode</h3>
+                <ul id="modeList"></ul>
+            </div>
+        </div>
 
+        <div id="tutorials">
+            <!-- Tutorial blocks will be loaded here -->
+        </div>
+    </div>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>
