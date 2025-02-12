@@ -3,7 +3,7 @@ const topicsSet = new Set();
 const modesSet = new Set();
 
 // Fetch and load the tutorials JSON data
-fetch('/data/tutorials.json')
+fetch('https://hernandezj1.github.io/digital-humanities-resources/data/tutorials.json')
     .then(response => response.json())
     .then(data => {
         tutorialsData.push(...data);
