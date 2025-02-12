@@ -1,0 +1,56 @@
+#app {
+    display: flex;
+    justify-content: space-between;
+}
+
+#filters {
+    width: 200px;
+    padding: 20px;
+}
+
+#searchBar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#tagFilters ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#tagFilters li {
+    cursor: pointer;
+    padding: 5px;
+}
+
+#tutorials {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tutorial-block {
+    width: 30%;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.tutorial-block h3 {
+    font-size: 1.2em;
+}
+
+.tutorial-block p {
+    font-size: 1em;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
