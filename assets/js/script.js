@@ -1,75 +1,79 @@
-const tutorialsData = [];
-const topicsSet = new Set();
-const modesSet = new Set();
+document.addEventListener("DOMContentLoaded", function () {
+    const tutorialsContainer = document.getElementById("tutorials");
+    const searchInput = document.getElementById("search");
+    const topicsContainer = document.getElementById("topics");
+    const modesContainer = document.getElementById("modes");
 
-// Fetch and load the tutorials JSON data
-fetch('https://raw.githubusercontent.com/hernandezj1/digital-humanities-resources/e33749c76fe8bd2e749564c1dafd8b2a2c1dded9/data/tutorials.json')
-    .then(response => response.json())
-    .then(data => {
-        tutorialsData.push(...data);
-        data.forEach(tutorial => {
+    let selectedTopics = new Set();
+    let selectedModes = new Set();
+
+    function renderFilters() {
+        const topicsSet = new Set();
+        const modesSet = new Set();
+
+        tutorialsData.forEach(tutorial => {
             tutorial.topics.forEach(topic => topicsSet.add(topic));
             tutorial.mode.forEach(mode => modesSet.add(mode));
         });
-        renderFilters();
-        renderTutorials(tutorialsData);
-    });
 
-// Render the topic and mode filters
-function renderFilters() {
-    const topicList = document.getElementById('topicList');
-    topicsSet.forEach(topic => {
-        const li = document.createElement('li');
-        li.textContent = topic;
-        li.onclick = () => filterByTopic(topic);
-        topicList.appendChild(li);
-    });
+        topicsContainer.innerHTML = "";
+        topicsSet.forEach(topic => {
+            const btn = document.createElement("button");
+            btn.textContent = topic;
+            btn.classList.add("filter-btn");
+            btn.onclick = () => toggleFilter(selectedTopics, topic);
+            topicsContainer.appendChild(btn);
+        });
 
-    const modeList = document.getElementById('modeList');
-    modesSet.forEach(mode => {
-        const li = document.createElement('li');
-        li.textContent = mode;
-        li.onclick = () => filterByMode(mode);
-        modeList.appendChild(li);
-    });
-}
+        modesContainer.innerHTML = "";
+        modesSet.forEach(mode => {
+            const btn = document.createElement("button");
+            btn.textContent = mode;
+            btn.classList.add("filter-btn");
+            btn.onclick = () => toggleFilter(selectedModes, mode);
+            modesContainer.appendChild(btn);
+        });
+    }
 
-// Render the tutorials
-function renderTutorials(tutorials) {
-    const tutorialsContainer = document.getElementById('tutorials');
-    tutorialsContainer.innerHTML = '';
-    tutorials.forEach(tutorial => {
-        const tutorialBlock = document.createElement('div');
-        tutorialBlock.classList.add('tutorial-block');
-        tutorialBlock.innerHTML = `
-            <h3><a href="${tutorial.link}" target="_blank">${tutorial.title}</a></h3>
-            <p>${tutorial.description}</p>
-        `;
-        tutorialsContainer.appendChild(tutorialBlock);
-    });
-}
+    function toggleFilter(set, value) {
+        if (set.has(value)) {
+            set.delete(value);
+        } else {
+            set.add(value);
+        }
+        renderTutorials();
+    }
 
-// Filter tutorials by search term
-function filterData() {
-    const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-    const filteredTutorials = tutorialsData.filter(tutorial => 
-        tutorial.title.toLowerCase().includes(searchTerm)
-    );
-    renderTutorials(filteredTutorials);
-}
+    function renderTutorials() {
+        tutorialsContainer.innerHTML = "";
 
-// Filter tutorials by topic
-function filterByTopic(topic) {
-    const filteredTutorials = tutorialsData.filter(tutorial => 
-        tutorial.topics.includes(topic)
-    );
-    renderTutorials(filteredTutorials);
-}
+        let filteredData = tutorialsData.filter(tutorial => {
+            let matchesSearch = tutorial.title.toLowerCase().includes(searchInput.value.toLowerCase());
+            let matchesTopics = selectedTopics.size === 0 || tutorial.topics.some(topic => selectedTopics.has(topic));
+            let matchesModes = selectedModes.size === 0 || tutorial.mode.some(mode => selectedModes.has(mode));
+            return matchesSearch && matchesTopics && matchesModes;
+        });
 
-// Filter tutorials by mode
-function filterByMode(mode) {
-    const filteredTutorials = tutorialsData.filter(tutorial => 
-        tutorial.mode.includes(mode)
-    );
-    renderTutorials(filteredTutorials);
-}
+        filteredData.forEach(tutorial => {
+            const div = document.createElement("div");
+            div.classList.add("tutorial-block");
+
+            const header = document.createElement("h3");
+            header.textContent = tutorial.title;
+            header.classList.add("tutorial-title");
+            header.onclick = () => window.open(tutorial.link, "_blank");
+
+            const meta = document.createElement("p");
+            meta.textContent = `Topics: ${tutorial.topics.join(", ")} | Mode: ${tutorial.mode.join(", ")}`;
+
+            div.appendChild(header);
+            div.appendChild(meta);
+            tutorialsContainer.appendChild(div);
+        });
+    }
+
+    searchInput.addEventListener("input", renderTutorials);
+    
+    renderFilters();
+    renderTutorials();
+});
